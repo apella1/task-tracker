@@ -1,10 +1,12 @@
 import React from 'react'; // react import isn't required for all components
 import './header.css';
 
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import Button from '../button/Button';
 
 const Header = ({title, subtitle, onAdd, showAdd}) => {
+  const location = useLocation()
 
   return (
     <header className='header'>
@@ -13,11 +15,12 @@ const Header = ({title, subtitle, onAdd, showAdd}) => {
             {/* <h2 style={{color: 'black'}}>{subtitle}</h2> inline styling properties taking camel casing as in JavaScript styling */}
         </div>
 
-        <Button 
-          text={showAdd ? 'Close'  : 'Add Task'} 
-          color={showAdd ? 'green'  : 'blue'} 
-          onClick={onAdd} 
-        />        
+        {location.pathname==='/' &&
+          <Button 
+            text={showAdd ? 'Close'  : 'Add Task'} 
+            color={showAdd ? 'green'  : 'blue'} 
+            onClick={onAdd} 
+          />}        
     </header>
   )
 }
